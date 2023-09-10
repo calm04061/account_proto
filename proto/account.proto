@@ -1,0 +1,139 @@
+// Copyright 2015, Google Inc.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+option java_multiple_files = true;
+option java_package = "com.calm0406.account";
+option java_outer_classname = "Account";
+option objc_class_prefix = "account";
+
+package account;
+
+// The greeting service definition.
+service Account {
+    // Sends a greeting
+    rpc AccountAdd (AccountRequest) returns (CountReply) {}
+    rpc AccountDetail (Key) returns (AccountReply) {}
+    rpc AccountDelete (Key) returns (CountReply) {}
+    rpc AccountUpdate (AccountRequest) returns (CountReply) {}
+    rpc AccountPage (AccountPageRequest) returns (AccountPageReply) {}
+    rpc AccountSelectByUsername (SimpleString) returns (Result) {}
+    rpc AccountCodeAdd (NewAccountCode) returns (Result) {}
+    rpc ClientInfo (SimpleString) returns (Result) {}
+    rpc CodeExchangeToken (NewAccountCode) returns (Result) {}
+    rpc RefreshToken (AuthTokenRequest) returns (Result) {}
+    rpc AccountSelectByAccessToken (SimpleString) returns (Result) {}
+
+
+}
+message Result {
+    int32 code = 1;
+    string msg = 2;
+    google.protobuf.Any data = 3;
+}
+message AuthTokenReply {
+    string access_token = 4;
+    string refresh_token = 5;
+    int64 expires_in = 6;
+    int64 refresh_token_expire_time = 7;
+    string token_type = 8;
+}
+message SimpleString {
+    string value = 1;
+}
+message Key {
+    int32 id = 1;
+}
+message CountReply {
+    uint64 data = 1;
+}
+message NewAccountCode {
+    int32 id = 1;
+    string username = 2;
+    string client_id = 3;
+    string code = 4;
+    int64 create_time = 5;
+}
+// The request message containing the user's name.
+message AccountRequest {
+    int32 id = 1;
+    string username = 2;
+    string password = 3;
+    bool enabled = 4;
+}
+// The request message containing the user's name.
+message AccountPageRequest {
+    string username = 2;
+    bool enabled = 3;
+    int64 page_size = 4;
+    int64 current_page = 5;
+}
+message ClientInfoReplay{
+    string client_id = 2;
+    string client_secret = 3;
+    string resource_server = 4;
+
+}
+message AccountPageReply {
+    repeated AccountReply list = 2;
+    int64 total_count = 3;
+    int64 page_size = 4;
+    int64 current_page = 5;
+}
+// The response message containing the greetings
+message AccountReply {
+    int32 id = 1;
+    string username = 2;
+    string password = 3;
+    bool enabled = 4;
+}
+
+message AccountCodeRequest {
+    string username = 1;
+    string client_id = 2;
+    string code = 3;
+}
+// The response message containing the greetings
+message AccountCodeReply {
+    int32 id = 1;
+    string username = 2;
+    string client_id = 3;
+    string code = 4;
+}
+message AuthTokenRequest {
+    string username = 1;
+    string client_id = 2;
+    string token = 3;
+    string refresh_token = 4;
+    int64 token_expire_time = 5;
+    int64 refresh_token_expire_time = 6;
+}
