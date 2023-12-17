@@ -46,16 +46,16 @@ service Account {
     rpc AccountDelete (Key) returns (CountReply) {}
     rpc AccountUpdate (AccountRequest) returns (CountReply) {}
     rpc AccountPage (AccountPageRequest) returns (AccountPageReply) {}
-    rpc AccountSelectByUsername (SimpleString) returns (Result) {}
-    rpc AccountCodeAdd (NewAccountCode) returns (Result) {}
-    rpc ClientInfo (SimpleString) returns (Result) {}
-    rpc CodeExchangeToken (NewAccountCode) returns (Result) {}
-    rpc RefreshToken (AuthTokenRequest) returns (Result) {}
-    rpc AccountSelectByAccessToken (SimpleString) returns (Result) {}
+    rpc AccountSelectByUsername (SimpleString) returns (SimpleResult) {}
+    rpc AccountCodeAdd (NewAccountCode) returns (SimpleResult) {}
+    rpc ClientInfo (SimpleString) returns (SimpleResult) {}
+    rpc CodeExchangeToken (NewAccountCode) returns (SimpleResult) {}
+    rpc RefreshToken (AuthTokenRequest) returns (SimpleResult) {}
+    rpc AccountSelectByAccessToken (SimpleString) returns (SimpleResult) {}
 
 
 }
-message Result {
+message SimpleResult {
     int32 code = 1;
     string msg = 2;
     google.protobuf.Any data = 3;
