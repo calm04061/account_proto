@@ -1,13 +1,20 @@
 [package]
 name = "account_proto"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 build = "build.rs"
 [lib]
 
 [dependencies]
-tonic = "0.11.0"
-prost = { version = "0.12.3", features = ["prost-derive"] }
-prost-types = "0.12.3"
+tonic = "0.12.2"
+prost = { version = "0.13.2", features = ["prost-derive"] }
+prost-types = "0.13.2"
 [build-dependencies]
-tonic-build = { version = "0.11.0", features = ["prost"] }
+tonic-build = { version = "0.12.2", features = ["prost"] }
+[gitflow]
+production_branch = "main"
+development_branch = "develop"
+feature_branch_prefix = "feature/"
+hotfix_branch_prefix = "hotfix/"
+version_tag_prefix = "v"
+origin = "origin"
