@@ -1,6 +1,6 @@
 [package]
 name = "account_proto"
-version = "0.1.7-SNAPSHOT"
+version = "0.1.7-upgrade"
 edition = "2021"
 build = "build.rs"
 [lib]
