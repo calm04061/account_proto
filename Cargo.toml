@@ -1,16 +1,17 @@
 [package]
 name = "account_proto"
-version = "0.4.0-SNAPSHOT"
+version = "0.4.0-upgrade"
 edition = "2021"
 build = "build.rs"
 [lib]
 
 [dependencies]
-tonic = "0.13.1"
-prost = { version = "0.13.5", features = ["prost-derive"] }
-prost-types = "0.13.5"
+tonic = "0.14.1"
+prost = { version = "0.14.1" }
+tonic-prost={version = "0.14.1"}
+prost-types = "0.14.1"
 [build-dependencies]
-tonic-build = { version = "0.13.1", features = ["prost"] }
+tonic-prost-build = { version = "0.14.1"}
 [gitflow]
 production_branch = "main"
 development_branch = "develop"
