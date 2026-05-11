@@ -52,8 +52,16 @@ service Account {
     rpc CodeExchangeToken (NewAccountCode) returns (SimpleResult) {}
     rpc RefreshToken (AuthTokenRequest) returns (SimpleResult) {}
     rpc AccountSelectByAccessToken (SimpleString) returns (SimpleResult) {}
+    rpc Jwks (JwksRequest) returns (JwksReply) {}
 
 
+}
+
+message JwksRequest {
+}
+
+message JwksReply {
+    string keys_json = 1;
 }
 message SimpleResult {
     int32 code = 1;
