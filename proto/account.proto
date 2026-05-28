@@ -71,9 +71,12 @@ message SimpleResult {
 message AuthTokenReply {
     string access_token = 4;
     string refresh_token = 5;
+    // access token 有效期（秒），由业务方自行控制过期时长
     int64 expires_in = 6;
     int64 refresh_token_expire_time = 7;
     string token_type = 8;
+    // 令牌签发时的绝对 Unix 时间戳（秒），供业务方参考
+    int64 issued_at = 9;
 }
 message SimpleString {
     string value = 1;
