@@ -53,6 +53,10 @@ service Account {
     rpc RefreshToken (AuthTokenRequest) returns (SimpleResult) {}
     rpc AccountSelectByAccessToken (SimpleString) returns (SimpleResult) {}
     rpc Jwks (JwksRequest) returns (JwksReply) {}
+    rpc ClientInfoPage (ClientInfoPageRequest) returns (ClientInfoPageReply) {}
+    rpc ClientInfoAdd (ClientInfoAddRequest) returns (CountReply) {}
+    rpc ClientInfoUpdate (ClientInfoUpdateRequest) returns (CountReply) {}
+    rpc ClientInfoDelete (Key) returns (CountReply) {}
 
 
 }
@@ -109,10 +113,37 @@ message AccountPageRequest {
     int64 current_page = 5;
 }
 message ClientInfoReplay{
+    int32 id = 1;
     string client_id = 2;
     string client_secret = 3;
     string resource_server = 4;
+    int64 create_time = 5;
+    int64 update_time = 6;
+}
 
+message ClientInfoPageRequest {
+    int64 page_size = 1;
+    int64 current_page = 2;
+}
+
+message ClientInfoPageReply {
+    repeated ClientInfoReplay list = 1;
+    int64 total_count = 2;
+    int64 page_size = 3;
+    int64 current_page = 4;
+}
+
+message ClientInfoAddRequest {
+    string client_id = 1;
+    string client_secret = 2;
+    string resource_server = 3;
+}
+
+message ClientInfoUpdateRequest {
+    int32 id = 1;
+    string client_id = 2;
+    string client_secret = 3;
+    string resource_server = 4;
 }
 message AccountPageReply {
     repeated AccountReply list = 2;
